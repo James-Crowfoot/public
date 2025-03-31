@@ -44,10 +44,32 @@ intelligence = 0
 friendliness = 0
 drool = 0
 
+PlayExcersise = 0
+PlayIntelligence = 0
+PlayFriendliness = 0
+PlayDrool = 0
+
+BotFriendliness = 0
+BotIntelligence = 0
+BotExcersise = 0
+BotDrool = 0
+
 game = True
 current_card = 0
 
 
+printall = False
+
+printall = bool(input("Debug: Print Variables: True/False"))
+debug_mode = bool(input("Debug: Debug Messages: True/False"))
+
+
+def printallvar():
+	if printall == True:
+		print("Excersise,Intelligence,Friendliness,drool")
+		print(excersise,intelligence,friendliness,drool)
+		print(PlayExcersise,PlayIntelligence,PlayFriendliness,PlayDrool)
+		print(BotExcersise,BotIntelligence,BotExcersise,BotDrool)
 #LOADING DOGS FROM TXT
 
 file = open("dogs.txt", "rt")
@@ -75,11 +97,11 @@ for i in range(0, 30):
 file.close()
 #print(cards)
 #debug_end()
-
+printallvar()
 total_cards = len(cards)
 
 # FUNCTIONS
-
+printallvar()
 
 def debug(message, log_check):
 	'''
@@ -88,7 +110,7 @@ def debug(message, log_check):
 	global debug_mode
 	global debug_log
 	debug_log.append(message)
-	if debug_mode == 1:
+	if debug_mode == True:
 		print(Fore.LIGHTCYAN_EX + "Debug: " + Fore.RESET + message)
 	'''
 	if log_check == 1:
@@ -115,8 +137,8 @@ while initialisation == "unsuccessful":
 		initialisation = "successful"
 
 		debug(
-		    Fore.RESET + "initialisation: " + Fore.GREEN + "successful" +
-		    Fore.RESET, 1)
+				Fore.RESET + "initialisation: " + Fore.GREEN + "successful" +
+				Fore.RESET, 1)
 		break
 
 #TITLE SEQUENCE
@@ -165,7 +187,7 @@ elif "2" in reply or "QUIT" in reply:
 	clear()
 	debug("quit", 1)
 	sys.exit(Back.RED + Fore.BLACK + "GAME QUIT" + Fore.RESET + Back.RESET)
-
+printallvar()
 # PLAY GAME
 debug("play game", 0)
 debug("card select", 1)
@@ -215,7 +237,7 @@ PrevWinner = "Player"
 while game == True:
 	CurrentPlayerCard = player_cards[current_card]
 	CurrentComputerCard = computer_cards[current_card]
-	
+
 	PlayExcersise = CurrentPlayerCard[0]
 	PlayIntelligence = CurrentPlayerCard[1]
 	PlayFriendliness = CurrentPlayerCard[2]
@@ -227,7 +249,7 @@ while game == True:
 	BotFriendliness = CurrentComputerCard[2]
 	BotDrool = CurrentComputerCard[3]
 	BotName = CurrentComputerCard[4]
-	
+	printallvar()
 	display_player_card(player_cards,computer_cards,current_card,ASCIIdogs)
 	ValidCategory = False
 	category = ""
@@ -239,18 +261,18 @@ while game == True:
 			print("Category must be: EXCERSISE INTELLIGENCE FRIENDLINESS DROOL")
 
 
-	
+	printallvar()
 	if category.lower() == "excersise":
 		PlayerStat = PlayExcersise
 		BotStat = BotExcersise
 		if PlayerStat > BotStat:
 			slow_print("Player Wins!",0.1)
-			
+
 			computer_cards.pop(current_card)
 			player_cards.append(CurrentComputerCard)
 			player_cards.pop(current_card)
 			player_cards.append(CurrentPlayerCard)
-		
+
 		elif PlayerStat < BotStat:
 			slow_print("Bot Wins!",0.1)
 			player_cards.pop(current_card)
@@ -265,13 +287,13 @@ while game == True:
 		BotStat = BotIntelligence
 		if PlayerStat > BotStat:
 			slow_print("Player Wins!",0.1)
-			
+
 			computer_cards.pop(current_card)
 			player_cards.append(CurrentComputerCard)
-			
+
 			player_cards.pop(current_card)
 			player_cards.append(CurrentPlayerCard)
-		
+
 		elif PlayerStat < BotStat:
 			slow_print("Bot Wins!",0.1)
 			player_cards.pop(current_card)
@@ -308,7 +330,7 @@ while game == True:
 			player_cards.append(CurrentComputerCard)
 			player_cards.pop(current_card)
 			player_cards.append(CurrentPlayerCard)
-			
+
 		elif PlayerStat > BotStat:
 			slow_print("Bot Wins!",0.1)
 			player_cards.pop(current_card)
@@ -327,7 +349,7 @@ while game == True:
 	elif len(player_cards) == 0:
 		game = False
 		print("COMPUTER WINS")
-
+	printallvar()
 
 sys.exit("GAME OVER")
-	
+
